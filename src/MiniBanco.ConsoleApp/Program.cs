@@ -2,11 +2,19 @@
 
 internal class Program
 {
+    private static void AplicarFechamentoMensal(IEnumerable<Conta> contas)
+    {
+        foreach (Conta conta in contas)
+        {
+            conta.AplicarFechamentoMensal();
+        }
+    }
+
     private static void ListarContas(IEnumerable<Conta> contas)
     {
         foreach (Conta conta in contas)
         {
-            string strConta = "Número: " + conta.Numero + " Titular: " + conta.Titular;
+            string strConta = "Número: " + conta.Numero + " Titular: " + conta.Titular + " Saldo: R$ " + conta.Saldo;
             Console.WriteLine(strConta);
         }
     }
@@ -28,7 +36,36 @@ internal class Program
 
         } while (!nrValido);
 
-        return new Conta(strTitular, numero);
+        bool tipoValido = false;
+        int tipoConta = 0;
+
+        do
+        {
+            Console.WriteLine("Digite o tipo de conta (1 - Conta Corrente; 2 - Conta Poupança; 3 - Conta Salário): ");
+            string strTipoConta = Console.ReadLine() ?? string.Empty;
+
+            tipoValido = int.TryParse(strTipoConta, out tipoConta);
+
+        } while (!tipoValido);
+
+        Conta conta = null;
+
+        switch (tipoConta)
+        {
+            case 1:
+                conta = new ContaCorrente(strTitular, numero);
+                break;
+            case 2:
+                conta = new ContaPoupanca(strTitular, numero);
+                break;
+            case 3:
+                conta = new ContaSalario(strTitular, numero, "Teste S.A.", 3000.0M);
+                break;
+            default:
+                break;
+        }
+
+        return conta;
     }
 
     private static void Main(string[] args)
@@ -63,11 +100,16 @@ internal class Program
             {
                 case 1: 
                     var conta = AbrirConta();
-                    contas.Add(conta);
+
+                    if (conta != null)
+                        contas.Add(conta);
+                    else
+                        Console.WriteLine("Não foi possível abrir a conta!");
                     break;
                 case 2:
                     break;
                 case 3:
+                    AplicarFechamentoMensal(contas);
                     break;
                 case 4:
                     ListarContas(contas);
