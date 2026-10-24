@@ -36,7 +36,33 @@ internal class Program
 
         } while (!nrValido);
 
-        return new ContaCorrente(strTitular, numero);
+        bool tipoValido = false;
+        int tipoConta = 0;
+
+        do
+        {
+            Console.WriteLine("Digite o tipo de conta (1 - Conta Corrente; 2 - Conta Poupança): ");
+            string strTipoConta = Console.ReadLine() ?? string.Empty;
+
+            tipoValido = int.TryParse(strTipoConta, out tipoConta);
+
+        } while (!tipoValido);
+
+        Conta conta = null;
+
+        switch (tipoConta)
+        {
+            case 1:
+                conta = new ContaCorrente(strTitular, numero);
+                break;
+            case 2:
+                conta = new ContaPoupanca(strTitular, numero);
+                break;
+            default:
+                break;
+        }
+
+        return conta;
     }
 
     private static void Main(string[] args)
@@ -71,7 +97,11 @@ internal class Program
             {
                 case 1: 
                     var conta = AbrirConta();
-                    contas.Add(conta);
+
+                    if (conta != null)
+                        contas.Add(conta);
+                    else
+                        Console.WriteLine("Não foi possível abrir a conta!");
                     break;
                 case 2:
                     break;
