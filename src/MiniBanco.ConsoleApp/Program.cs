@@ -41,7 +41,7 @@ internal class Program
 
         do
         {
-            Console.WriteLine("Digite o tipo de conta (1 - Conta Corrente; 2 - Conta Poupança): ");
+            Console.WriteLine("Digite o tipo de conta (1 - Conta Corrente; 2 - Conta Poupança; 3 - Conta Salário): ");
             string strTipoConta = Console.ReadLine() ?? string.Empty;
 
             tipoValido = int.TryParse(strTipoConta, out tipoConta);
@@ -57,6 +57,9 @@ internal class Program
                 break;
             case 2:
                 conta = new ContaPoupanca(strTitular, numero);
+                break;
+            case 3:
+                conta = new ContaSalario(strTitular, numero, "Teste S.A.", 3000.0M);
                 break;
             default:
                 break;
