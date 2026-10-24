@@ -2,11 +2,19 @@
 
 internal class Program
 {
+    private static void AplicarFechamentoMensal(IEnumerable<Conta> contas)
+    {
+        foreach (Conta conta in contas)
+        {
+            conta.AplicarFechamentoMensal();
+        }
+    }
+
     private static void ListarContas(IEnumerable<Conta> contas)
     {
         foreach (Conta conta in contas)
         {
-            string strConta = "Número: " + conta.Numero + " Titular: " + conta.Titular;
+            string strConta = "Número: " + conta.Numero + " Titular: " + conta.Titular + " Saldo: R$ " + conta.Saldo;
             Console.WriteLine(strConta);
         }
     }
@@ -28,7 +36,7 @@ internal class Program
 
         } while (!nrValido);
 
-        return new Conta(strTitular, numero);
+        return new ContaCorrente(strTitular, numero);
     }
 
     private static void Main(string[] args)
@@ -68,6 +76,7 @@ internal class Program
                 case 2:
                     break;
                 case 3:
+                    AplicarFechamentoMensal(contas);
                     break;
                 case 4:
                     ListarContas(contas);

@@ -1,10 +1,10 @@
-public class Conta
+public abstract class Conta
 {
     public string Titular { get; private set; }
 
     public int Numero { get; private set; }
 
-    public decimal Saldo { get; private set; }
+    public decimal Saldo { get; protected set; }
 
     public Conta(string titular, int numero)
     {
@@ -18,12 +18,18 @@ public class Conta
         this.Saldo += valor;
     }
 
-    public void Sacar(decimal valor)
+    public virtual void Sacar(decimal valor)
     {
+        if (valor > this.Saldo)
+        {
+            Console.WriteLine("Saldo insuficiente!");
+            return;
+        }
+
         this.Saldo -= valor;
     }
 
-    public void AplicarFechamentoMensal()
+    public virtual void AplicarFechamentoMensal()
     {
     }
 }
