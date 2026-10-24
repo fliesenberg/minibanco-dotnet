@@ -1,7 +1,40 @@
-﻿internal class Program
+﻿using System.ComponentModel;
+
+internal class Program
 {
+    private static void ListarContas(IEnumerable<Conta> contas)
+    {
+        foreach (Conta conta in contas)
+        {
+            string strConta = "Número: " + conta.Numero + " Titular: " + conta.Titular;
+            Console.WriteLine(strConta);
+        }
+    }
+
+    private static Conta AbrirConta()
+    {
+        Console.WriteLine("Digite o nome do titular: ");
+        string strTitular = Console.ReadLine() ?? string.Empty;
+
+        bool nrValido = false;
+        int numero = 0;
+
+        do
+        {
+            Console.WriteLine("Digite o número da conta: ");
+            string strNumero = Console.ReadLine() ?? string.Empty;
+
+            nrValido = int.TryParse(strNumero, out numero); 
+
+        } while (!nrValido);
+
+        return new Conta(strTitular, numero);
+    }
+
     private static void Main(string[] args)
     {
+        List<Conta> contas = new List<Conta>();
+
         Console.WriteLine("MiniBanco.ConsoleApp: Motor de Gestão de Contas Bancárias");
 
         int opcao = 0;
@@ -24,6 +57,25 @@
             if (!opcaoValida)
             {
                 Console.WriteLine("Opção inválida!");
+            }
+
+            switch (opcao)
+            {
+                case 1: 
+                    var conta = AbrirConta();
+                    contas.Add(conta);
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    ListarContas(contas);
+                    break;
+                case 0:
+                    break;
+                default:
+                    break;
             }
 
         } while (opcao != 0 || !opcaoValida);
