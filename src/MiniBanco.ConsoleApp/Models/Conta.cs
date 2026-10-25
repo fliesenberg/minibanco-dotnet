@@ -19,25 +19,46 @@ public abstract class Conta
     protected void RegistrarTransacao(string descricao, string tipo, decimal valor)
     {
         var transacao = new Transacao(descricao, tipo, valor);
-        this.Extrato.Add(transacao);
+        this.Extrato.Add(transacao);            
     }
 
     public void Depositar(decimal valor, string descricao)
     {
-        RegistrarTransacao("Depósito", "Deposito", valor);
-        this.Saldo += valor;
+        try
+        {
+            RegistrarTransacao("Depósito", "Deposito", valor);
+            this.Saldo += valor;            
+        }
+        catch (ArgumentException)
+        {
+            throw;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 
     public virtual void Sacar(decimal valor)
     {
         if (valor > this.Saldo)
         {
-            Console.WriteLine("Saldo insuficiente!");
-            return;
+            throw new SaldoInsuficienteException();
         }
 
-        RegistrarTransacao("Saque", "Saque", valor);
-        this.Saldo -= valor;
+        try
+        {
+            RegistrarTransacao("Saque", "Saque", valor);
+            this.Saldo -= valor;            
+        }
+        catch (ArgumentException)
+        {
+            throw;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 
     public virtual void AplicarFechamentoMensal()

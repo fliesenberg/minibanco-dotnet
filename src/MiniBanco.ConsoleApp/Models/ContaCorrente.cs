@@ -14,17 +14,38 @@ public class ContaCorrente : Conta
 
         if (valor > limiteSaque)
         {
-            Console.WriteLine("Saldo insuficiente!");
-            return;
+            throw new SaldoInsuficienteException();
         }
 
-        RegistrarTransacao("Saque", "Saque", valor);
-        this.Saldo -= valor;
+        try
+        {
+            RegistrarTransacao("Saque", "Saque", valor);
+            this.Saldo -= valor;            
+        }
+        catch (ArgumentException)
+        {
+            throw;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 
     public override void AplicarFechamentoMensal()
     {
-        RegistrarTransacao("Tarifa Mensal", "Tarifa", TARIFA);
-        this.Saldo -= TARIFA;
+        try
+        {
+            RegistrarTransacao("Tarifa Mensal", "Tarifa", TARIFA);
+            this.Saldo -= TARIFA;            
+        }
+        catch (ArgumentException a)
+        {
+            Console.WriteLine("Erro: " + a.Message);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Erro: " + e.Message);
+        }
     }
 }
