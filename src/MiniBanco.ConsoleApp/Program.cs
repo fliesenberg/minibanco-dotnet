@@ -87,16 +87,23 @@
 
         if (contaMovimentacao != null)
         {
-            if (opcao == 1)
+            try
             {
-                contaMovimentacao.Depositar(valor, "Depósito");
+                if (opcao == 1)
+                {
+                    contaMovimentacao.Depositar(valor, "Depósito");
 
-            } else if (opcao == 2)
-            {
-                contaMovimentacao.Sacar(valor);
+                } else if (opcao == 2)
+                {
+                    contaMovimentacao.Sacar(valor);
+                }
+
+                Console.WriteLine("Movimentação solicitada foi efetuada!");                            
             }
-
-            Console.WriteLine("Movimentação solicitada foi efetuada!");            
+            catch (Exception e)
+            {
+                Console.WriteLine("Erro ao fazer a movimentação: " + e.Message);
+            }
         }
     }
 
