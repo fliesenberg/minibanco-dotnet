@@ -18,11 +18,13 @@ public class ContaCorrente : Conta
             return;
         }
 
+        RegistrarTransacao("Saque", "Saque", valor);
         this.Saldo -= valor;
     }
 
     public override void AplicarFechamentoMensal()
     {
+        RegistrarTransacao("Tarifa Mensal", "Tarifa", TARIFA);
         this.Saldo -= TARIFA;
     }
 }
