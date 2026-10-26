@@ -16,13 +16,29 @@ public class ContaSalario : Conta
 
     public override void Sacar(decimal valor)
     {
-        base.Sacar(valor);
-
-        this.ValorSaquesMesAtual += valor;
-
-        if (this.ValorSaquesMesAtual > this.LimiteSaquesMensais)
+        try
         {
-            this.Saldo -= TARIFA_LIMITE_SAQUES;
+            base.Sacar(valor);
+
+            this.ValorSaquesMesAtual += valor;
+
+            if (this.ValorSaquesMesAtual > this.LimiteSaquesMensais)
+            {
+                RegistrarTransacao("Tarifa Limite de Saques Mensais Excedido", "Tarifa", TARIFA_LIMITE_SAQUES);
+                this.Saldo -= TARIFA_LIMITE_SAQUES;
+            }            
+        }
+        catch (SaldoInsuficienteException)
+        {
+            throw;
+        }
+        catch (ArgumentException)
+        {
+            throw;
+        }
+        catch (Exception)
+        {
+            throw;
         }
     }
 
