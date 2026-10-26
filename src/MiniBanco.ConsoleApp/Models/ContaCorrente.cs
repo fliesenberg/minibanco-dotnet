@@ -4,8 +4,9 @@ public class ContaCorrente : Conta
 
     private decimal LimiteChequeEspecial { get; set; }
 
-    public ContaCorrente(string titular, int numero) : base(titular, numero)
-    {    
+    public ContaCorrente(string titular, int numero, decimal limiteChequeEspecial) : base(titular, numero)
+    {
+        this.LimiteChequeEspecial = limiteChequeEspecial;
     }
 
     public override void Sacar(decimal valor)
