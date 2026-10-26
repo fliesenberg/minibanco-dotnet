@@ -23,10 +23,13 @@ code .
 ## 4. Abrir o terminal do VS Code
 Ctrl + '
 
-## 5. Fazer o build do projeto
+## 5. Mudar para a pasta do projeto
+cd src\MiniBanco.ConsoleApp
+
+## 6. Fazer o build do projeto
 dotnet build
 
-## 6. Rodar o aplicativo
+## 7. Rodar o aplicativo
 dotnet run
 
 # Tecnologias Utilizadas
