@@ -30,23 +30,26 @@
     private static void FazerMovimentacao(IEnumerable<Conta> contas)
     {
         Conta contaMovimentacao = null;
-        bool contaValida = false;
+
+        int nrConta = 0;
+        bool nrContaValida = false;
 
         do
         {
             Console.WriteLine("Digite o número da conta: ");
             string strNumero = Console.ReadLine() ?? string.Empty;
 
-            int numero = 0;
-            if (int.TryParse(strNumero, out numero))
-            {
-                contaMovimentacao = ObterConta(contas, numero);
+            nrContaValida = int.TryParse(strNumero, out nrConta);
 
-                if (contaMovimentacao != null)
-                    contaValida = true;
-            }
-            
-        } while (!contaValida);
+        } while (!nrContaValida);
+
+        contaMovimentacao = ObterConta(contas, nrConta);
+
+        if (contaMovimentacao == null)
+        {
+            Console.WriteLine("Número da conta informado é inválido!");
+            return;
+        }
 
         int opcao = 0;
         bool opcaoValida = false;
