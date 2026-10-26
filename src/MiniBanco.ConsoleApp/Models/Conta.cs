@@ -6,7 +6,7 @@ public abstract class Conta
 
     public decimal Saldo { get; protected set; }
 
-    protected List<Transacao> Extrato { get; set; }
+    public List<Transacao> Extrato { get; protected set; }
 
     public Conta(string titular, int numero)
     {
@@ -62,6 +62,10 @@ public abstract class Conta
     }
 
     public virtual void AplicarFechamentoMensal()
+    {
+    }
+
+    public virtual void MostrarDadosConta()
     {
     }
 }

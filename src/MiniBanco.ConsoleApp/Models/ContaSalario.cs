@@ -46,4 +46,16 @@ public class ContaSalario : Conta
     {
         this.ValorSaquesMesAtual = 0.0M;
     }
+
+    public override void MostrarDadosConta()
+    {
+        Console.WriteLine("> DADOS DA CONTA: ");
+        Console.WriteLine("  - Tipo: Conta Salário");
+        Console.WriteLine("  - Titular: " + this.Titular + " | Conta: " + this.Numero);
+        Console.WriteLine("  - Atributo Específico: Empregador: " + this.Empregador);
+        Console.WriteLine("  - Atributo Específico: Limite de Saques Mensais: R$ " + this.LimiteSaquesMensais);
+        Console.WriteLine("  - Atributo Específico: Tarifa Limite de Saques Mensais Excedido: R$ " + TARIFA_LIMITE_SAQUES);
+        Console.WriteLine("  - Saldo Atual: R$ " + this.Saldo);
+        Console.WriteLine("");              
+    }
 }

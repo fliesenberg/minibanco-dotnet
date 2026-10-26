@@ -1,5 +1,11 @@
 ﻿internal class Program
 {
+    private static void ExibirRelatorio(IEnumerable<Conta> contas)
+    {
+        MotorAnalise motor = new MotorAnalise();
+        motor.AnalisarContas(contas);
+    }
+
     private static void AplicarFechamentoMensal(IEnumerable<Conta> contas)
     {
         foreach (Conta conta in contas)
@@ -107,15 +113,6 @@
             {
                 Console.WriteLine("Erro ao fazer a movimentação: " + e.Message);
             }
-        }
-    }
-
-    private static void ListarContas(IEnumerable<Conta> contas)
-    {
-        foreach (Conta conta in contas)
-        {
-            string strConta = "Número: " + conta.Numero + " Titular: " + conta.Titular + " Saldo: R$ " + conta.Saldo;
-            Console.WriteLine(strConta);
         }
     }
 
@@ -250,7 +247,11 @@
                     AplicarFechamentoMensal(contas);
                     break;
                 case 4:
-                    ListarContas(contas);
+                    if (contas != null && contas.Count > 0)
+                        ExibirRelatorio(contas);    
+                    else
+                        Console.WriteLine("Nenhuma conta aberta até o momento!");
+                    
                     break;
                 case 0:
                     break;

@@ -24,4 +24,14 @@ public class ContaPoupanca : Conta
             Console.WriteLine("Erro: " + e.Message);
         }
     }
+
+    public override void MostrarDadosConta()
+    {
+        Console.WriteLine("> DADOS DA CONTA: ");
+        Console.WriteLine("  - Tipo: Conta Poupança");
+        Console.WriteLine("  - Titular: " + this.Titular + " | Conta: " + this.Numero);
+        Console.WriteLine("  - Atributo Específico: Taxa de Rendimento Mensal: " + TAXA_RENDIMENTO_MENSAL + " %");
+        Console.WriteLine("  - Saldo Atual: R$ " + this.Saldo);
+        Console.WriteLine("");               
+    }
 }
