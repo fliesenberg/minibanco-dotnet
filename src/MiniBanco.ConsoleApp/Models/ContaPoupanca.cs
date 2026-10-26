@@ -10,6 +10,9 @@ public class ContaPoupanca : Conta
     {
         decimal rendimento = this.Saldo * (decimal)TAXA_RENDIMENTO_MENSAL / 100;
 
+        if (rendimento == 0.0M)
+            return;
+
         try
         {
             RegistrarTransacao("Rendimento Mensal", "Deposito", rendimento);

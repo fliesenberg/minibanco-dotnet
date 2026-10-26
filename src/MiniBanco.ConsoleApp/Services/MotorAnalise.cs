@@ -52,7 +52,8 @@ public class MotorAnalise
 
         foreach (Transacao transacao in conta.Extrato)
         {
-            Console.WriteLine(" " + GetIndicadorTransacao(transacao) + " " + transacao.Descricao + " ------------------ " + transacao.Tipo + ": R$ " + transacao.Valor + "(" + transacao.Pontos + "pts)");
+            string strDescricao = transacao.Descricao.PadRight(45, '-');
+            Console.WriteLine(" " + GetIndicadorTransacao(transacao) + " " + strDescricao + " " + transacao.Tipo + ": R$ " + transacao.Valor + "(" + transacao.Pontos + "pts)");
         }
 
         Console.WriteLine("");
