@@ -157,8 +157,23 @@
 
         string strEmpregador = string.Empty;
         decimal limiteSaque = 0.0M;
+        decimal limiteChequeEspecial = 0.0M;
 
-        if (tipoConta == 3)
+        if (tipoConta == 1)
+        {
+            bool limiteChequeEspecialValido = false;
+
+            do
+            {
+                Console.WriteLine("Digite o limite do cheque especial: ");
+                string strLimiteChequeEspecial = Console.ReadLine() ?? string.Empty;
+
+                limiteChequeEspecialValido = decimal.TryParse(strLimiteChequeEspecial, out limiteChequeEspecial);
+                
+            } while (!limiteChequeEspecialValido);
+
+        }
+        else if (tipoConta == 3)
         {
             Console.WriteLine("Digite o nome do empregador: ");
             strEmpregador = Console.ReadLine() ?? string.Empty;
@@ -175,18 +190,18 @@
             } while (!limiteValido);
         }
 
-        Conta conta = CriarConta(tipoConta, strTitular, numero, strEmpregador, limiteSaque);
+        Conta conta = CriarConta(tipoConta, strTitular, numero, limiteChequeEspecial, strEmpregador, limiteSaque);
         return conta;
     }
 
-    private static Conta CriarConta(int tipoConta, string titular, int numero, string empregador, decimal limiteSaque)
+    private static Conta CriarConta(int tipoConta, string titular, int numero, decimal limiteChequeEspecial, string empregador, decimal limiteSaque)
     {
         Conta conta = null;
 
         switch (tipoConta)
         {
             case 1:
-                conta = new ContaCorrente(titular, numero);
+                conta = new ContaCorrente(titular, numero, limiteChequeEspecial);
                 break;
             case 2:
                 conta = new ContaPoupanca(titular, numero);
