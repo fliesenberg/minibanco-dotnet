@@ -48,4 +48,15 @@ public class ContaCorrente : Conta
             Console.WriteLine("Erro: " + e.Message);
         }
     }
+
+    public override void MostrarDadosConta()
+    {
+        Console.WriteLine("> DADOS DA CONTA: ");
+        Console.WriteLine("  - Tipo: Conta Corrente");
+        Console.WriteLine("  - Titular: " + this.Titular + " | Conta: " + this.Numero);
+        Console.WriteLine("  - Atributo Específico: Limite Cheque Especial: R$ " + this.LimiteChequeEspecial);
+        Console.WriteLine("  - Atributo Específico: Tarifa: R$ " + TARIFA);
+        Console.WriteLine("  - Saldo Atual: R$ " + this.Saldo);
+        Console.WriteLine("");
+    }
 }
